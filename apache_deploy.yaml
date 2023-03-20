@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: apache-container
-        image: apache:latest
+        image: klentytestacr.azurecr.io/apache-image:{{BUILD_NUMBER}}
         ports:
         - containerPort: 80
