@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nginx-container
-        image: klentytestacr.azurecr.io/nginx-image:{{BUILD_NUMBER}}
+        image: klentytestacr.azurecr.io/my-image:latest
         ports:
         - containerPort: 80
