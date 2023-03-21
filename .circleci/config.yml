@@ -1,20 +1,11 @@
 version: 2.1
-
 jobs:
-  build-and-push:
+  build:
     docker:
-      - image: docker:19.03.12
-    environment:
-      IMAGE_NAME: klentytestacr.azurecr.io/test-image:latest
+      - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
-      - setup_remote_docker
       - run:
-          name: "Login to Azure"
-          command: |
-            docker login klentytestacr.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
-      - run:
-          name: "Build and Push Docker image"
+          name: Build Docker image
           command: |
             docker build -t test-image -f Dockerfile.nginx .
-            docker push klentytestacr.azurecr.io/test-image:latest
