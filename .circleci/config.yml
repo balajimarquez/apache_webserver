@@ -8,4 +8,4 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build -t test-image -f Dockerfile.nginx .
+            docker build -t test-image .
