@@ -18,8 +18,7 @@ jobs:
           name: Push Docker image
           command: |
             docker login klentytestacr.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
-            docker push klentytestacr.azurecr.io/my-image:latest
-      
+            docker push klentytestacr.azurecr.io/my-image:latest    
   deploy:
     machine: true
     steps:
