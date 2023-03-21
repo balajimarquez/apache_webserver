@@ -21,4 +21,20 @@ jobs:
           command: |
             docker login klentytestacr.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
             docker push klentytestacr.azurecr.io/nginx-image:latest
-            docker push klentytestacr.azurecr.io/apache-image:latest   
+            docker push klentytestacr.azurecr.io/apache-image:latest
+  deploy:
+    docker:
+      - image: microsoft/azure-cli:latest
+    steps:
+      - checkout
+      - run: |
+          az account set --subscription $AZURE_SUBSCRIPTION_ID
+          az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
+          kubectl apply -f deployment.yaml
+workflows:
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
