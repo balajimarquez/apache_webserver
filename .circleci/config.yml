@@ -1,23 +1,16 @@
-version: 2.1
+version: 2
 jobs:
   build:
+    working_directory: /app
     docker:
       - image: docker:17.05.0-ce-git
-    environment:
-      DOCKER_HOST: tcp://localhost:2375
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: Build Docker image
+          name: Install dependencies
           command: |
-            docker build -t my-image .
-      - run:
-          name: Tag Docker image
-          command: |
-            docker tag my-image:latest klentytestacr.azurecr.io/my-image:latest
-      - run:
-          name: Push Docker image
-          command: |
-            docker login klentytestacr.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
-            docker push klentytestacr.azurecr.io/my-image:latest
+            apk add --no-cache \
+              py-pip=9.0.0-r1
+            pip install \
+              docker-compose==1.12.0
