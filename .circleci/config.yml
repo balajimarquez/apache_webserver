@@ -19,11 +19,13 @@ jobs:
           command: |
             docker login klentytestacr.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
             docker push klentytestacr.azurecr.io/my-image:latest
-      - run:
-          name: Deploy to AKS
-          command: |
-             curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-             az account set --subscription $SUBSCRIPTION_ID
-             az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
-             kubectl apply -f nginx_deploy.yaml
-             kubectl apply -f nginx_svc.yaml
+      
+  deploy:
+    machine: true
+    steps:
+      - checkout
+      - run: |
+          az account set --subscription $SUBSCRIPTION_ID
+          az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
+          kubectl apply -f nginx_deploy.yaml
+          kubectl apply -f nginx_svc.yaml    
