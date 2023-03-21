@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: docker:latest
     steps:
       - checkout
       - setup_remote_docker
@@ -18,15 +18,4 @@ jobs:
           name: Push Docker image
           command: |
             docker login klentytestacr.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
-            docker push klentytestacr.azurecr.io/my-image:latest
-
-  deploy:
-    docker:
-      - image: microsoft/azure-cli:latest
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run: |
-          az account set --subscription $SUBSCRIPTION_ID
-          az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
-      - run: kubectl apply -f nginx_deploy.yaml   
+            docker push klentytestacr.azurecr.io/my-image:latest   
