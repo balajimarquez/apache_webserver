@@ -20,7 +20,8 @@ jobs:
             docker login klentytestacr.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
             docker push klentytestacr.azurecr.io/my-image:latest    
   deploy:
-    machine: true
+    docker:
+      - image: docker:latest
     steps:
       - checkout
       - run: |
