@@ -27,10 +27,11 @@ jobs:
       - image: microsoft/azure-cli:latest
     steps:
       - checkout
+      - setup_remote_docker
       - run: |
-          az account set --subscription $AZURE_SUBSCRIPTION_ID
+          az account set --subscription $SUBSCRIPTION_ID
           az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
-          kubectl apply -f deployment.yaml
+          kubectl apply -f nginx_deploy.yaml 
 workflows:
   build-and-deploy:
     jobs:
