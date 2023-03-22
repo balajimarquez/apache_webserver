@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Deploy into AKS
           command: |  
-            kubectl apply -f nginx_deploy.yaml
+            kubectl delete -f nginx_deploy.yaml
   apache:          
     docker:
       - image: circleci/node:14  
