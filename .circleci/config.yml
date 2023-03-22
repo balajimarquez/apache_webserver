@@ -38,7 +38,10 @@ jobs:
             kubectl version --short --client
             az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
             az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
-            kubectl apply -f nginx_deploy.yaml 
+      - run:
+          name: Deploy into AKS
+          command: |  
+            kubectl apply -f nginx_deploy.yaml
 
 workflows:
   build-and-test:
