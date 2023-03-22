@@ -15,7 +15,7 @@ jobs:
       - run:
          name: Deploy to Kubernetes
          command: |
-           kubectl apply -f nginx_deploy.yaml  --kubeconfig=$KUBE_CONFIG
+           kubectl apply -f nginx_deploy.yaml  --kubeconfig=$KUBECONFIG
 
 
 workflows:
