@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Deploy into AKS
           command: |  
-            kubectl delete -f nginx_deploy.yaml
+            kubectl apply -f nginx_deploy.yaml
   apache:          
     docker:
       - image: circleci/node:14  
@@ -65,4 +65,3 @@ workflows:
   nginx-and-apache:
     jobs:
       - nginx
-      - apache
