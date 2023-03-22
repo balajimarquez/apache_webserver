@@ -14,32 +14,31 @@ jobs:
       - run:
           name: Tag Docker image
           command: |
-            docker tag nginx-image:latest klentytestacr.azurecr.io/nginx-image:latest
-            docker tag apache-image:latest klentytestacr.azurecr.io/apache-image:latest
+            docker tag nginx-image:latest $ACR_REGISTRY.azurecr.io/nginx-image:latest
+            docker tag apache-image:latest $ACR_REGISTRY.azurecr.io/apache-image:latest
       - run:
           name: Push Docker image
           command: |
-            docker login klentytestacr.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
-            docker push klentytestacr.azurecr.io/nginx-image:latest
-            docker push klentytestacr.azurecr.io/apache-image:latest
-  test:          
-    docker:
-      - image: circleci/node:14
-    steps:
-      - run:
-          name: Install Azure CLI
-          command: |
-            curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-            sudo apt-get update
-            sudo apt-get install azure-cli
-            az account set --subscription $SUBSCRIPTION_ID
-            az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
+            docker login $ACR_REGISTRY.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
+            docker push $ACR_REGISTRY.azurecr.io/nginx-image:latest
+            docker push $ACR_REGISTRY.azurecr.io/apache-image:latest
+  #test:          
+    #docker:
+      #- image: circleci/node:14
+    #steps:
+     ##   name: Install Azure CLI
+       #   command: |
+        #    curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+         #   sudo apt-get update
+          #  sudo apt-get install azure-cli
+           # az account set --subscription $SUBSCRIPTION_ID
+           # az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
 
-workflows:
-  build-and-test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+#workflows:
+ # build-and-test:
+  #  jobs:
+   #   - build
+    #  - test:
+     #     requires:
+      #      - build
  
