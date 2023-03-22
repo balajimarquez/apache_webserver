@@ -22,19 +22,17 @@ jobs:
             docker login klentytestacr.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
             docker push klentytestacr.azurecr.io/nginx-image:latest
             docker push klentytestacr.azurecr.io/apache-image:latest
-  deploy:
+  test:          
     docker:
-      - image: atejada1127/azure-cli-kubectl:latest
+      - image: circleci/node:14
     steps:
-      - checkout
-      - run: |
-          az account set --subscription $SUBSCRIPTION_ID
-          az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
-          kubectl apply -f nginx_deploy.yaml 
-workflows:
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
+      - run:
+          name: Install Azure CLI
+          command: |
+            curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+            sudo apt-get update
+            sudo apt-get install azure-cli
+            az account set --subscription $SUBSCRIPTION_ID
+            az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
+
+ 
