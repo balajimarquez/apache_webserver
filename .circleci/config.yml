@@ -24,10 +24,9 @@ jobs:
             docker push klentytestacr.azurecr.io/apache-image:latest
   deploy:
     docker:
-      - image: microsoft/azure-cli:latest
+      - image: bitnami/azure-cli:latest
     steps:
       - checkout
-      - setup_remote_docker
       - run: |
           az account set --subscription $SUBSCRIPTION_ID
           az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
