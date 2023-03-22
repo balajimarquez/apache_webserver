@@ -5,6 +5,7 @@ jobs:
       - image: circleci/node:14  
     steps:
       - checkout
+      - setup_remote_docker
       - run: 
           name: Install Tools & Login to AKS
           command: |
