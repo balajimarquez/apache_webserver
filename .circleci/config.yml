@@ -24,12 +24,16 @@ jobs:
             docker push $ACR_REGISTRY.azurecr.io/apache-image:latest
   test:          
     docker:
-      - image: circleci/golang:1.12.4 
+      - image: circleci/node:14  
     steps:
-      - checkout
-      - run: |
-          az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
-          az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
+      - run: 
+          name: Install Azure CLI
+          command: |
+            curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+            sudo apt-get update
+            sudo apt-get install azure-cli
+            az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+            az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
            
 
 workflows:
