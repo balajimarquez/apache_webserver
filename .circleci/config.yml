@@ -24,7 +24,7 @@ jobs:
             docker push klentytestacr.azurecr.io/apache-image:latest
   deploy:
     docker:
-      - image: bitnami/azure-cli:latest
+      - image: atejada1127/azure-cli-kubectl:latest
     steps:
       - checkout
       - run: |
