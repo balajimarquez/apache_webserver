@@ -35,4 +35,11 @@ jobs:
             az account set --subscription $SUBSCRIPTION_ID
             az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
 
+workflows:
+  build-and-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
  
