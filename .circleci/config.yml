@@ -13,14 +13,9 @@ jobs:
            chmod +x kubectl
            sudo mv kubectl /usr/local/bin/
       - run:
-         name: Set up Kubernetes config
-         command: |
-           echo $KUBECONFIG_BASE64 | base64 --decode > kubeconfig.yaml
-           export KUBECONFIG=$(pwd)/kubeconfig.yaml
-      - run:
          name: Deploy to Kubernetes
          command: |
-           kubectl apply -f nginx_deploy.yaml
+           kubectl apply -f nginx_deploy.yaml  --kubeconfig=$KUBE_CONFIG
 
 
 workflows:
