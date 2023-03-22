@@ -4,18 +4,20 @@ jobs:
     docker:
       - image: circleci/node:14  
     steps:
-     - run:
+      - checkout
+      - run: npm install
+      - run:
          name: Install kubectl
          command: |
            curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
            chmod +x kubectl
            sudo mv kubectl /usr/local/bin/
-     - run:
+      - run:
          name: Set up Kubernetes config
          command: |
            echo $KUBECONFIG_BASE64 | base64 --decode > kubeconfig.yaml
            export KUBECONFIG=$(pwd)/kubeconfig.yaml
-     - run:
+      - run:
          name: Deploy to Kubernetes
          command: |
            kubectl apply -f nginx_deploy.yaml
