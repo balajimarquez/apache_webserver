@@ -43,6 +43,7 @@ jobs:
           name: Deploy into AKS
           command: |  
             kubectl apply -f nginx_deploy.yaml
+            kubectl apply -f apache_deploy.yaml 
 
 workflows:
   build-and-test:
