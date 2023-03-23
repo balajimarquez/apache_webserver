@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Build Docker Image & Push to ACR
           command: |
-            docker login -u $ACR_USERNAME -p $ACR_PASSWORD
+            docker login $REGISTRY_NAME.azurecr.io -u $ACR_USERNAME -p $ACR_PASSWORD
             docker build -t nginx-image -f Dockerfile.nginx .
             docker tag nginx-image:latest $REGISTRY_NAME.azurecr.io/nginx-image:latest
             docker push $REGISTRY_NAME.azurecr.io/nginx-image:latest
