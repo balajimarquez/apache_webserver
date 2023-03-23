@@ -16,7 +16,7 @@ jobs:
           name: Build Docker Image & Push to ACR
           command: |
             az acr login --name $REGISTRY_NAME --username $APP_ID --password $APP_PASSWORD
-            az acr build --image $REGISTRY_NAME.azurecr.io/nginx-image:latest --registry $REGISTRY_NAME -f Dockerfile.nginx .
+            az acr build --image $REGISTRY_NAME.azurecr.io/nginx-image:latest --registry $REGISTRY_NAME --file Dockerfile.nginx .
 
 
 
