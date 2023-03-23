@@ -6,6 +6,7 @@ jobs:
     environment:
       DOCKER_HOST: tcp://40.76.91.132:2375
     steps:
+      - checkout
       - run: 
           name: Install Tools & Login to AKS
           command: |
