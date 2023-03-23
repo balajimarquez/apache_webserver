@@ -1,11 +1,10 @@
 version: 2.1
 jobs:
   nginx:          
-    docker:
-      - image: circleci/node:14
+    machine:
+      enabled: true
     environment:
-      DOCKER_HOST: tcp://0.0.0.0:2376
-      
+      DOCKER_HOST: tcp://40.76.91.132:2376
     steps:
       - run: 
           name: Install Tools & Login to AKS
