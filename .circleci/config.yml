@@ -12,12 +12,11 @@ jobs:
             sudo apt-get update
             curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
             sudo apt-get install docker
-            az acr login --name $REGISTRY_NAME --username $APP_ID --password $APP_PASSWORD
       - run:
           name: Build Docker Image & Push to ACR
           command: |
-            docker build -t nginx-image -f Dockerfile.nginx .
-            docker tag nginx-image:latest $REGISTRY_NAME.azurecr.io/nginx-image:latest
+            docker build -t $REGISTRY_NAME.azurecr.io/nginx-image -f Dockerfile.nginx .
+            az acr login --name $REGISTRY_NAME --username $APP_ID --password $APP_PASSWORD
             docker push $REGISTRY_NAME.azurecr.io/nginx-image:latest
 
 
