@@ -4,7 +4,7 @@ jobs:
     machine:
       enabled: true
     environment:
-      DOCKER_HOST: tcp://40.76.91.132:2376
+      DOCKER_HOST: tcp://40.76.91.132:2375
     steps:
       - run: 
           name: Install Tools & Login to AKS
