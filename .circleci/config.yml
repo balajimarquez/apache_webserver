@@ -17,8 +17,8 @@ jobs:
           command: |
             az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
             docker build -t nginx-image -f Dockerfile.nginx .
-            docker tag nginx-image:latest $ACR_REGISTRY.azurecr.io/nginx-image:latest
-            docker push $ACR_REGISTRY.azurecr.io/nginx-image:latest
+            docker tag nginx-image:latest $REGISTRY_NAME.azurecr.io/nginx-image:latest
+            docker push $REGISTRY_NAME.azurecr.io/nginx-image:latest
 
 
 workflows:
