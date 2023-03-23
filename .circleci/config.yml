@@ -2,10 +2,10 @@ version: 2.1
 jobs:
   nginx:          
     docker:
-      - image: circleci/node:14  
+      - image: circleci/node:14
+    environment:
+      DOCKER_HOST: tcp://$DOCKER_HOST_IP:$DOCKER_HOST_PORT
     steps:
-      - checkout
-      - setup_remote_docker
       - run: 
           name: Install Tools & Login to AKS
           command: |
