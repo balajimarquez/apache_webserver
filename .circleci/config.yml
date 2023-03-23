@@ -4,7 +4,8 @@ jobs:
     docker:
       - image: circleci/node:14
     environment:
-      DOCKER_HOST: tcp://$DOCKER_HOST_IP:$DOCKER_HOST_PORT
+      DOCKER_HOST: tcp://0.0.0.0:2376
+      
     steps:
       - run: 
           name: Install Tools & Login to AKS
