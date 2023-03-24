@@ -27,7 +27,7 @@ jobs:
           command: |  
             mkdir ~/.kube
             touch ~/.kube/config
-            echo $KUBECONFIG | base64 --decode > ~/.kube/config
+            base64 --decode $KUBECONFIG > ~/.kube/config
             kubectl apply -f nginx_deploy.yaml
 
 
