@@ -25,6 +25,8 @@ jobs:
       - run:
           name: Deploy into AKS
           command: |  
+            mkdir ~/.kube
+            touch ~/.kube/config
             echo $KUBECONFIG | base64 --decode > ~/.kube/config
             kubectl apply -f nginx_deploy.yaml
 
