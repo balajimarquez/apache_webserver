@@ -4,7 +4,7 @@ jobs:
     machine:
       enabled: true
     environment:
-      DOCKER_HOST: tcp://20.172.229.168:2375
+      DOCKER_HOST: tcp://20.172.229.168:2376
     steps:
       - checkout
       - run: 
